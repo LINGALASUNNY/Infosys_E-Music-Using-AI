@@ -1,0 +1,131 @@
+
+
+{% extends "dashboard.html" %}
+
+{% block title %}Profile Page{% endblock %}
+
+{% block content %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+   
+
+    .profile-container {
+        display: flex;
+        background-color: rgb(8, 26, 46);
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 75%;
+        height:430px;
+        overflow: hidden;
+        margin:200px auto;
+    }
+
+    .profile-sidebar {
+        background-color: #f4f4f9;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 300px;
+    }
+
+    .profile-pic {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .profile-main {
+        padding: 20px;
+        flex-grow: 1;
+        
+    }
+
+    .profile-header {
+        text-align: center;
+        margin-bottom: 20px;
+
+    }
+
+    .profile-header h1 {
+        font-size: 25px;
+        color:white;
+    }
+
+    .profile-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profile-item {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+    }
+
+    .label {
+        font-weight: bold;
+        font-size: 20px;
+        color:white;
+    }
+    
+    .value {
+        font-size: 20px;
+        color: rgb(165, 164, 164);
+    }
+
+    .profile-item span {
+        display: inline-block;
+    }
+</style>
+
+<div class="profile-container">
+    <div class="profile-sidebar">
+        {% if profile.profile_picture %}
+            <img src="{ %static 'image/profilepic.webp'%}" alt="Profile Picture" class="profile-pic">
+        {% else %}
+            <p>No profile picture uploaded.</p>
+        {% endif %}
+    </div>
+
+    <div class="profile-main">
+        <div class="profile-header">
+            <h1>Profile Page</h1>
+        </div>
+
+        <div class="profile-info">
+            <div class="profile-item">
+                <span class="label">Username:</span>
+                <span class="value">{{ user.username }}</span>
+            </div>
+            <div class="profile-item">
+                <span class="label">First Name:</span>
+                <span class="value">{{ user.first_name }}</span>
+            </div>
+            <div class="profile-item">
+                <span class="label">Last Name:</span>
+                <span class="value">{{ user.last_name }}</span>
+            </div>
+            <div class="profile-item">
+                <span class="label">Email:</span>
+                <span class="value">{{ user.email }}</span>
+            </div>
+            <div class="profile-item">
+                <span class="label">Last Login:</span>
+                <span class="value">{{ user.last_login }}</span>
+            </div>
+            <div class="profile-item">
+                <span class="label">Date Joined:</span>
+                <span class="value">{{ user.date_joined }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

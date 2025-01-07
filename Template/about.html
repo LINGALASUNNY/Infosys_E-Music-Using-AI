@@ -1,0 +1,73 @@
+{% extends "home.html" %}
+
+{% block title %}About us{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background:rgb(10, 24, 61);
+        }
+        .container-2 {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            color:white;
+        }
+        .container h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: rgb(252, 3, 86);
+        }
+        .container p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .highlights {
+            margin: 20px 0;
+            padding: 10px;
+            background-color:rgba(35, 48, 80, 0.849) ;
+            border-left: 5px solid rgb(252, 3, 86);
+        }
+        .highlights h3 {
+            margin: 0;
+            font-size: 20px;
+            color: rgb(252, 3, 86);
+        }
+        .highlights ul { 
+            padding: 0;
+            margin: 10px 0 0 0;
+        }
+        .highlights ul li {
+            font-size: 14px;
+            margin: 5px 20px;
+        }
+    </style>
+
+   
+    <div class="container-2">
+        <h2>Our Story</h2>
+        <p>EMusic was founded with a vision to bring the world closer through music. We aim to provide an immersive audio experience that empowers listeners and supports artists. With our platform, music isn’t just heard – it’s felt, shared, and celebrated.</p>
+
+        <h2>Our Mission</h2>
+        <p>Our mission is to create a vibrant music ecosystem where every song, podcast, and playlist tells a story. We strive to innovate and make music accessible to everyone, anywhere, while fostering a strong connection between artists and fans.</p>
+
+        <div class="highlights">
+            <h3>Why Choose EMusic?</h3>
+            <ul>
+                <li>Massive library of songs, podcasts, and exclusive content.</li>
+                <li>Ad-free listening and offline playback for premium users.</li>
+                <li>Personalized playlists and recommendations based on your taste.</li>
+                <li>High-quality audio streaming for an immersive experience.</li>
+                <li>Committed to supporting emerging artists and creators.</li>
+            </ul>
+        </div>
+
+        <h2>Join Our Community</h2>
+        <p>Whether you’re a music enthusiast, a creator, or someone who simply loves to explore new sounds, eMusic welcomes you. Let’s redefine how music connects us and creates unforgettable moments together.</p>
+    </div>
+  
+    {% endblock %}

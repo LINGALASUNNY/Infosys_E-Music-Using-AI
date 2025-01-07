@@ -1,0 +1,151 @@
+{% extends "dashboard.html" %}
+
+{% block title %}Profile Page{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background:rgb(34, 32, 84)
+          
+        }
+        .header {
+            margin-top:-5px;
+            background: linear-gradient(to right, rgb(105, 21, 93), rgb(34, 32, 84));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            margin:0px auto;
+            color:white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+           
+        }
+        .hero {
+            padding: 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .plan-a{
+           
+            display:flex;
+            justify-content: space-evenly;
+        }
+        .plans {
+            padding: 20px;
+        }
+        .plan {
+            border:none;
+          
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: rgb(17, 23, 38);
+            color:white;
+            width:290px;
+            cursor: pointer;
+           
+        }
+        .plan:hover{
+            transform:scale(1.02);
+        }
+        .plan h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .plan ul {
+            
+            padding-left:20px;
+        }
+        .plan ul li {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        .subscribe-button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color:rgb(252, 3, 86);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .subscribe-button:hover {
+            background-color: rgba(252, 3, 86, 0.764);
+        }
+        .terms {
+            font-size: 12px;
+            color: #666;
+            margin-top: 15px;
+        }
+    </style>
+
+    <div class="header">
+        <h1>Listen without limits</h1>
+        <p>Try 2 months of Premium for ₹119. Only ₹119/month after. Cancel anytime.</p>
+    </div>
+
+    <div class="container">
+        <div class="hero">
+            <h1>Affordable plans for any situation</h1>
+            <p>Choose a Premium plan and listen to ad-free music without limits on your phone, speaker, and other devices. Pay in various ways. Cancel anytime.</p>
+        </div>
+
+        <div class="plans">
+            <div class="plan-a">
+            <div class="plan">
+                <h2>Premium Mini</h2>
+                <ul>
+                    <li>₹29 for 1 week</li>
+                    <li>1 mobile-only Premium account</li>
+                    <li>Offline listening of up to 30 songs on 1 device</li>
+                    <li>One-time payment</li>
+                    <li>Basic audio quality</li>
+                </ul>
+                <a href="#" class="subscribe-button">Subscribe</a>
+            </div>
+            <div class="plan">
+                <h2>Premium Family</h2>
+                <ul>
+                    <li>₹179 for 2 months</li>
+                    <li>₹179/month after</li>
+                    <li>Up to 6 Premium accounts</li>
+                    <li>Control content marked as explicit</li>
+                    <li>Cancel anytime</li>
+                </ul>
+                <a href="#" class="subscribe-button">Subscribe</a>
+                <p class="terms">Offer only available if you haven’t tried Premium before. For up to 6 family members residing at the same address. Terms apply.</p>
+            </div>
+
+            <div class="plan">
+                <h2>Premium Individual</h2>
+                <ul>
+                    <li>₹119 for 2 months</li>
+                    <li>₹119/month after</li>
+                    <li>1 Premium account</li>
+                    <li>Cancel anytime</li>
+                </ul>
+                <a href="#" class="subscribe-button">Subscribe</a>
+                <p class="terms">Offer only available if you haven’t tried Premium before. Terms apply.</p>
+            </div>
+            
+        </div>
+           
+        </div>
+        </div>
+    </div>
+    {% endblock %}

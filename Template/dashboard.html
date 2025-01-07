@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">       
+</head>
+<style>
+     *:focus {
+           outline: none;
+        }
+        body{
+            font-family: Arial, sans-serif;
+            padding:0;
+            margin:0;
+            background:rgb(10, 24, 61);
+        }
+      .search-container {
+            display: flex;
+            align-items: center;
+            width: 405px;
+            height: 30px;
+            font-size: 20px;
+            transition: width 0.3s, height 0.3s;
+            border: 1px solid #ccc;
+            border-radius:;
+            padding: 10px;
+            background-color:#fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container.expanded {
+            width: 500px;
+            height: 40px;
+        }
+
+        .search-input {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            padding-left:10px;
+           
+        }
+
+        .icon {
+            cursor: pointer;
+            margin: 2px;
+            font-size: 18px;
+            color:black;
+        }
+
+        .clear-icon {
+            display: none;
+            color:black; 
+        }
+
+        .search-container.expanded .clear-icon {
+            display: block;
+        }
+
+        .search-btn {
+            display: none;
+            padding: 6px 12px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 25px;
+            background-color: rgb(252, 3, 86);
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            height:38px;
+        }
+
+        .search-container.expanded .search-btn {
+            display: block;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: #505050;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius:100%;
+        }
+        .dropbtn i{
+            font-size:20px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            right:20px;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown-content .divider {
+            height: 1px;
+            background-color: #e5e5e5;
+            margin: 8px 0;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .navbar{
+            width:100%;
+            height:80px;
+            display:flex;
+            justify-content: space-between;
+            align-items:center;
+            background:rgb(8, 26, 46);
+            color:white;
+            position: fixed;
+            top: 0;
+            z-index:1;
+  
+        }
+        .navbar-left{
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-left i{
+            font-size:30px;
+            color:rgb(252, 3, 86);
+            margin-left:5px;
+        }
+
+        .navbar-left h2{
+            margin-left:5px;
+            font-size:30px;
+        }
+        .navbar-left li{
+            list-style: none;
+            margin-left:60px;
+            font-size:20px;
+        }
+        .navbar-left li a:hover{
+            color:rgb(252, 3, 86);
+        }
+        .navbar-left li a{
+            text-decoration: none;
+            color:white;
+        }
+        .navbar-right{
+            display: flex;
+            align-items: center;
+            margin-right:20px;
+            cursor:pointer;
+            color:white;
+        } 
+        .premium-btn{
+            background:white;
+            border:none;
+            font-size:18px;
+            margin-right:15px;
+            padding:10px;
+            border-radius: 10px;
+        }
+        .premium-btn:hover{
+            background:rgba(255, 255, 255, 0.776);
+            
+        }
+        .premium-btn a{
+            font-weight:bold;
+            text-decoration: none;
+            color:black;
+        }
+        .navbar-right .bell{
+            margin-right:25px;
+        }
+        .bell i{
+            font-size:30px;
+            color:rgb(252, 3, 86)
+        }
+
+        .footer {
+            background-color: rgb(8, 26, 46);
+            color: #fff;
+            padding: 20px 0;
+            border-top:1px solid black;
+            /*position:absolute;
+            left: 0;
+            bottom: 0;*/
+            width: 100%;
+        }
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .footer-section {
+            flex: 1;
+            margin: 10px;
+            min-width: 200px;
+        }
+        .footer-section h4 {
+            margin-bottom: 10px;
+        }
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .footer-section ul li {
+            margin-bottom: 5px;
+        }
+        .footer-section ul li a {
+            color: rgb(102, 111, 128);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            margin:10px;
+        }
+        .footer-section ul li a:hover {
+            color: #ddd;
+        }
+        .social-media {
+            display: flex;
+            justify-content: flex-start;
+        }
+        .social-media li {
+            margin-right: 10px;
+        }
+
+        .track {
+            margin:10px;
+            height:45px;
+            display: flex;
+            align-items: center;
+            background-color:rgb(8, 26, 46);
+            color: white;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            text-align: left;
+            transition: transform 0.3s;
+            font-family: monospace;
+        }
+
+        .track:hover {
+            transform: scale(1.02);
+        }
+
+        .track img {
+            width: 45px;
+            height: 45px;
+            border-radius: 5px;
+            margin-right: 15px; 
+        }
+
+        .track div {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 2px;
+        }
+
+        .trackname {
+            font-weight: bold;
+            margin: 0;
+            font-size:15px;
+        }
+
+        #results {
+            padding:10px; 
+            border:none;
+            display:none;
+            background:rgba(255,255,255,1);
+            width: 502px;
+            height:300px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            z-index: 1;
+            position:absolute;
+            left:32.5%;
+            margin-top:-15px;
+           
+        }
+        #results::-webkit-scrollbar {
+            display: none;
+        }
+        #results.active {
+            display: block;
+        }
+
+        .cards-1, .cards-2 {
+            display: flex;
+            justify-content: space-between;
+            width: 70%;
+            margin:0 auto;
+        }
+        .cards-1 a{
+            text-decoration: none;
+        }
+        .cards-2 a {
+            text-decoration:none;
+        }
+        .song-card {
+            position: relative;
+            width: 200px;
+            border-radius: 3px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin:10px;
+        }
+
+        .song-card:hover {
+            transform: scale(1.05);
+        }
+
+        .song-image {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .song-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            color: rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .song-card:hover .play-icon {
+            opacity: 1;
+        }
+
+        .song-name {
+            padding: 10px;
+            text-align: center;
+            background-color: white;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            border-top: 2px solid #eee;
+        }
+        .card-container h2{
+            color:white;
+            font-family: monospace;
+            margin-left:150px;
+        }
+        .maincontent{
+            height:90vh;
+            margin-top:100px;
+        }
+
+        .voice-icon {
+        font-size: 25px;
+        cursor: pointer;
+        color: #4CAF50;
+        margin-left: 10px;
+    }
+    .voice-icon:hover {
+        color: #3e8e41;
+    }
+</style>
+
+<body>
+    {% load static %}
+
+    <div class="navbar">
+        <div class="navbar-left">
+            <i class="fa-brands fa-tiktok"></i>
+            <h2>E Music</h2>
+            <li><a href="{% url 'dashboard' %}">Home</a></li>
+        </div>
+
+        <div class="navbar-middle">
+        <div class="search-container" id="search-container">
+            <i class="fa-solid fa-magnifying-glass icon" id="search-icon"></i>
+            <input type="text" class="search-input" id="search_input" placeholder="Search...">
+            <span class="clear-icon" id="clear-icon">&#x2715;</span>
+            <button class="search-btn" id="search-btn">Search</button>
+            <i class="fa-solid fa-microphone voice-icon" id="voice-icon"></i> 
+        </div>
+        </div>
+
+        <div class="navbar-right">
+            <button class="premium-btn"><a href="{% url 'subscription' %}">Premium</a></button>
+            <span class="bell"><i class="fa-solid fa-bell"></i></span>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown()"><i class="fa-solid fa-user"></i></button>
+                <div class="dropdown-content" id="dropdown-content">
+                    <a href="{% url 'profile' %}">Profile</a>
+                    <a href="{% url 'helpcenter' %}">Help Center</a>
+                    <a href="{% url 'settings' %}">settings</a>
+                    <div class="divider"></div>
+                    <a href="{% url 'signout' %}">Sign out</a>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div id="results"></div> <!-- Added this div -->
+    <div class="maincontent">
+    <main>
+        {% block content %}
+        <!-- Default content -->
+        <div class="card-container">
+            <h2>Top Playlists</h2>
+            <div class="cards-1">
+                <a href="https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn?si=U_b5W3iySI-_40xrBPmvWg"><div class="song-card">
+                    <div class="song-image">
+                        <img src="{% static 'image/img7.jpg' %}" alt="Song Image">
+                        <div class="play-icon">&#9654;</div>
+                    </div>
+                    <div class="song-name">lofi beats</div>
+                </div></a>
+                <a href="https://open.spotify.com/playlist/37i9dQZF1DWZd79rJ6a7lp?si=e0nIAu_7SGarNfib5jsvsQ"><div class="song-card">
+                    <div class="song-image">
+                        <img src="{% static 'image/img6.jpg' %}" alt="Song Image">
+                        <div class="play-icon">&#9654;</div>
+                    </div>
+                    <div class="song-name">sleep songs</div>
+                </div></a>
+                <a href="https://open.spotify.com/track/7gYGLJafbrlW0OyRbcEiUg?si=25366fa80fe7420a"><div class="song-card">
+                    <div class="song-image">
+                        <img src="{% static 'image/img8.jpg' %}" alt="Song Image">
+                        <div class="play-icon">&#9654;</div>
+                    </div>
+                    <div class="song-name">chill vibes</div>
+                </div></a>
+                <a href="https://open.spotify.com/playlist/37i9dQZF1DWTABUarzWcyu?si=JxQpCNBETSOJ6Bd-NI1TLA"><div class="song-card">
+                    <div class="song-image">
+                        <img src="{% static 'image/img9.jpg' %}" alt="Song Image">
+                        <div class="play-icon">&#9654;</div>
+                    </div>
+                    <div class="song-name">Party Mood</div>
+                </div></a>
+            </div>
+            <div class="cards-2">
+                <a href="https://open.spotify.com/track/2mYJbq3AgST7lhWZjbCtZt?si=1ddb50c3df0146cd"><div class="song-card">
+                    <div class="song-image">
+                        <img src="{% static 'image/img10.jpg' %}" alt="Song Image">
+                        <div class="play-icon">&#9654;</div>
+                    </div>
+                    <div class="song-name">Morning tunes</div>
+                </div></a>
+                <a href="https://open.spotify.com/playlist/3rmhemPIVT2iORjeTxxytZ?si=97JQy9-bRNKAMBpTtR4Zaw"><div class="song-card">
+                    <div class="song-image">
+                        <img src="{% static 'image/img13.jpg' %}" alt="Song Image">
+                        <div class="play-icon">&#9654;</div>
+                    </div>
+                    <div class="song-name">alone music</div>
+                </div></a>
+                <a href="https://open.spotify.com/playlist/37i9dQZF1DWTwbZHrJRIgD?si=o5s8tCQKQBSZ_MieamDh4A"><div class="song-card">
+                    <div class="song-image">
+                        <img src="{% static 'image/img15.jpg' %}" alt="Song Image">
+                        <div class="play-icon">&#9654;</div>
+                    </div>
+                    <div class="song-name">Happy vibes </div>
+                </div></a>
+                <a href="https://open.spotify.com/playlist/37i9dQZF1DX9lzz0FRAxgl?si=Ld-YPO1RQGaePtFGcQ96xQ"><div class="song-card">
+                    <div class="song-image">
+                        <img src="{% static 'image/img5.jpg' %}" alt="Song Image">
+                        <div class="play-icon">&#9654;</div>
+                    </div>
+                    <div class="song-name">Top songs</div>
+                </div></a>
+            </div>
+        </div>
+
+        {% endblock %}
+    </main>
+</div>
+    
+
+   <div class="footer">
+        <footer>   
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <ul class="social-media">
+                      <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                      <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                      <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                      <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <ul>
+                      <li><a href="#">Our Story</a></li>
+                      <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul>
+                      <li><a href="#">Music</a></li>
+                      <li><a href="#">Subscription</a></li>
+                      <li><a href="#">Custom Music</a></li>
+                      <li><a href="#">Playlists</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul> 
+                      <li><a href="#">Contact</a></li>
+                      <li><a href="#">Email</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>         
+    </div>
+
+<script>
+// JavaScript for handling search and displaying results
+const searchContainer = document.getElementById('search-container');
+const search_Input = document.getElementById('search_input');
+const clearIcon = document.getElementById('clear-icon');
+const searchIcon = document.getElementById('search-icon');
+const searchBtn = document.getElementById('search-btn');
+
+search_Input.addEventListener('focus', () => {
+    searchContainer.classList.add('expanded');
+});
+
+clearIcon.addEventListener('click', () => {
+    search_Input.value = '';
+    searchContainer.classList.remove('expanded');
+    document.getElementById('results').classList.remove('active');
+    search_Input.blur();
+});
+
+search_Input.addEventListener('blur', () => {
+    if (search_Input.value === '') {
+        searchContainer.classList.remove('expanded');
+    }
+});
+
+function toggleDropdown() {
+    document.getElementById("dropdown-content").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+};
+
+// Spotify search results handling
+const clientId = '88b0264b49174588be4b4cb8f7ebd6f7'; 
+const clientSecret = '8f90a91a5cbb4b0091ab73faf57976e6'; 
+
+const getToken = async () => {
+    const response = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
+        },
+        body: 'grant_type=client_credentials'
+    });
+    const data = await response.json();
+    return data.access_token;
+};
+
+const searchTracks = async (query) => {
+    const token = await getToken();
+    const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=track`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    const data = await response.json();
+    return data.tracks.items;
+};
+
+const handleSearch = async () => {
+    const query = search_Input.value.trim();
+    if (query.length > 0) {
+        const tracks = await searchTracks(query);
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = '';
+        tracks.forEach(track => {
+            const trackElement = document.createElement('div');
+            trackElement.classList.add('track');
+            trackElement.innerHTML = `
+                <img src="${track.album.images[2].url}" alt="${track.name}">
+                <div>
+                    <p class="trackname">${track.name}</p>
+                    <p class="trackname">${track.artists[0].name}</p>
+                </div>
+            `;
+            // Add click event to redirect to Spotify
+            trackElement.addEventListener('click', () => {
+                window.open(track.external_urls.spotify, '_blank');
+            });
+            resultsDiv.appendChild(trackElement);
+        });
+        resultsDiv.classList.add('active');
+    }
+};
+
+searchBtn.addEventListener('click', handleSearch);
+
+// Check if SpeechRecognition is supported
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+
+recognition.continuous = false; // Stop listening when user stops speaking
+recognition.lang = 'en-US'; // Set the language for recognition
+
+// Voice search button
+const voiceIcon = document.getElementById('voice-icon');
+
+// Start voice recognition when the user clicks the microphone
+voiceIcon.addEventListener('click', () => {
+    recognition.start();
+    voiceIcon.style.color = '#FF0000'; // Change color to indicate it's listening
+});
+
+// Handle the speech input once recognition is complete
+recognition.onresult = (event) => {
+    const speechResult = event.results[0][0].transcript;
+    document.getElementById('search_input').value = speechResult; // Set the speech input to the search field
+    handleSearch(); // Automatically trigger search with the voice input
+    voiceIcon.style.color = '#4CAF50'; // Reset the microphone color after listening
+};
+
+// Handle errors
+recognition.onerror = (event) => {
+    console.error('Error occurred during voice recognition:', event.error);
+    voiceIcon.style.color = '#4CAF50'; // Reset the microphone color
+};
+
+</script>
+</body>
+</html>

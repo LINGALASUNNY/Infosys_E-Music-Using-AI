@@ -1,0 +1,259 @@
+{% extends "dashboard.html" %}
+
+{% block title %}Help Center {% endblock %}
+
+{% block content %}
+<style>
+    
+    body{  
+            font-family: Arial, sans-serif;
+            background:rgb(10, 24, 61);
+            margin:0;
+            padding:0;
+        }
+        header {
+            background: linear-gradient(to right, rgb(105, 21, 93), rgb(34, 32, 84));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container-5 {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+           background:rgb(10, 24, 61);
+            border-radius: 8px;
+           
+        }
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .search-bar input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            background-color:rgb(252, 3, 86);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: rgb(252, 3, 86);
+        }
+        .clear-button {
+            padding: 10px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .clear-button:hover {
+            background-color: #e43c3c;
+        }
+        .questions {
+            list-style: none;
+            padding: 0;
+        }
+        .questions li {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            color:white;
+            border:none;
+            background:rgb(8, 26, 46)
+        }
+       
+        .answer {
+            margin-top: 20px;
+            padding: 10px;
+            border:none;
+            border-radius: 4px;
+            background-color:rgb(10, 24, 61);
+            color:white;
+        }
+        .no-results {
+            color: red;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+.collapsible {
+  background-color: rgb(8, 26, 46);
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  border-bottom:1px solid black;
+}
+
+.active, .collapsible:hover {
+  background-color:rgba(8, 26, 46);
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color:rgb(36, 38, 72);
+  color:white;
+}
+
+.cont{
+    width:800px;
+    margin:0 auto;
+}
+</style>
+
+
+<header>
+    <h1>Spotify Help Center</h1>
+</header>
+<div class="container-5">
+    <div class="search-bar">
+        <input type="text" id="s-input" placeholder="Search for help...">
+        <button onclick="searchFAQ()">Search</button>
+        <button class="clear-button" onclick="clearSearch()">&#10005;</button>
+    </div>
+    <ul id="result" class="questions"></ul>
+    <div id="no-results" class="no-results" style="display: none;">No results found. Please try a different query.</div>
+    <div id="answer" class="answer"></div>
+</div>
+
+ <div class="cont">
+<button type="button" class="collapsible">Contact us</button>
+<div class="content">
+    <p>Can’t find the solution you’re looking for? Here’s how to get help from our experts.
+        Note: We currently don’t offer support by phone.</p>
+</div>
+
+
+<p></p>
+<button type="button" class="collapsible">Cancel Premium plans</button>
+<div class="content">
+  <p>Your Premium stays until your next billing date, then your account switches to free.
+
+    Note: If you cancel during a zero-priced free trial period, your account will switch over to our free service immediately. Zero-priced free trials can't be reactivated.
+    
+    You keep your playlists and saved music when your account is free. You can also still log in and play with ads.</p>
+</div>
+<button type="button" class="collapsible">Failed payment help</button>
+<div class="content">
+  <p>Make sure your payment method has sufficient funds, and is:
+    Registered in the same country to your Spotify account.
+    Not expired or canceled.
+    Enabled for foreign, secure online, and recurring purchases. Look for these settings in your bank’s mobile app.
+    Due to new banking regulations in India, some payment providers no longer support recurring payments. 
+    For a Premium subscription that automatically renews each month, you need a card that supports recurring payments.</p>
+</div>
+<button type="button" class="collapsible">Refund policy</button>
+<div class="content">
+  <p>As a heads up, we can’t refund:
+    Gift cards bought from a store. It’s best to return them to the store.
+    Premium payments made through a partner, such as iTunes. You can contact them for refund requests (see their details on your account page, under Your plan).
+    If you don’t want Premium anymore, you can cancel any time and keep what you paid for. Your account will remain on Premium until the end of your billing period.
+    After that, your account switches to free.
+    For more information, check out our terms and conditions.</p>
+</div>
+</div>
+
+<script>
+    const faq = {
+        "How to reset my password?": "To reset your password, go to the login page and click 'Forgot Password?'. Follow the instructions sent to your email.",
+        "How to cancel my subscription?": "To cancel your subscription, go to your account settings and click 'Cancel Subscription'.", 
+        "Why can't I play certain songs?": "Some songs might be unavailable in your region due to licensing agreements.",
+        "How to create a playlist?": "Click on 'Create Playlist' in your library and add your favorite songs to it.",
+    };
+
+    function searchFAQ() {
+        const query = document.getElementById('s-input').value.toLowerCase();
+        const resultsContainer = document.getElementById('result');
+        const noResultsMessage = document.getElementById('no-results');
+        resultsContainer.innerHTML = '';
+        noResultsMessage.style.display = 'none';
+
+        if (query.trim() === '') return;
+
+        let found = false;
+
+        for (const question in faq) {
+            if (question.toLowerCase().includes(query)) {
+                const li = document.createElement('li');
+                li.textContent = question;
+                li.onclick = () => showAnswer(faq[question]);
+                resultsContainer.appendChild(li);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            noResultsMessage.style.display = 'block';
+        }
+    }
+
+    function clearSearch() {
+        document.getElementById('s-input').value = '';
+        document.getElementById('result').innerHTML = '';
+        document.getElementById('no-results').style.display = 'none';
+        document.getElementById('answer').textContent = '';
+    }
+
+    function showAnswer(answer) {
+        const answerContainer = document.getElementById('answer');
+        answerContainer.textContent = answer;
+    }
+   
+    var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+coll[i].addEventListener("click", function() {
+this.classList.toggle("active");
+var content = this.nextElementSibling;
+if (content.style.display === "block") {
+  content.style.display = "none";
+} else {
+  content.style.display = "block";
+}
+});
+}
+
+</script>
+
+{% endblock %}
